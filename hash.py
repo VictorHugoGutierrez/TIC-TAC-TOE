@@ -10,33 +10,32 @@ def displayhash(hash):
     for j in range(len(hash[0])):
       print(hash[i][j], end="" + "|")
     print()
-
-
+    
 def verificationWinner(hash, symbol):
-  if hash[0][0] == symbol and hash[1][0] == symbol and hash[2][0] == symbol:
-    print("You are Winner!")
-    question()
-  elif hash[0][0] == symbol and hash[0][1] == symbol and hash[0][2] == symbol:
-    print("You are Winner!")
-    question()
-  elif hash[0][2] == symbol and hash[1][2] == symbol and hash[2][2] == symbol:
-    print("You are Winner!")
-    question()
-  elif hash[2][0] == symbol and hash[2][1] == symbol and hash[2][2] == symbol:
-    print("You are Winner!")
-    question()
-  elif hash[0][0] == symbol and hash[1][1] == symbol and hash[2][2] == symbol:
-    print("You are Winner!")
-    question()
-  elif hash[0][2] == symbol and hash[1][1] == symbol and hash[2][0] == symbol:
-    print("You are Winner!")
-    question()
-  elif hash[0][1] == symbol and hash[1][1] == symbol and hash[2][1] == symbol:
-    print("You are Winner!")
-    question()
-  elif hash[1][0] == symbol and hash[1][1] == symbol and hash[1][2] == symbol:
-    print("You are Winner!")
-    question()
+    if hash[0][0] == symbol and hash[1][0] == symbol and hash[2][0] == symbol:
+        print("You are Winner!")
+        question()
+    elif hash[0][0] == symbol and hash[0][1] == symbol and hash[0][2] == symbol:
+        print("You are Winner!")
+        question()
+    elif hash[0][2] == symbol and hash[1][2] == symbol and hash[2][2] == symbol:
+        print("You are Winner!")
+        question()
+    elif hash[2][0] == symbol and hash[2][1] == symbol and hash[2][2] == symbol:
+        print("You are Winner!")
+        question()
+    elif hash[0][0] == symbol and hash[1][1] == symbol and hash[2][2] == symbol:
+        print("You are Winner!")
+        question()
+    elif hash[0][2] == symbol and hash[1][1] == symbol and hash[2][0] == symbol:
+        print("You are Winner!")
+        question()
+    elif hash[0][1] == symbol and hash[1][1] == symbol and hash[2][1] == symbol:
+        print("You are Winner!")
+        question()
+    elif hash[1][0] == symbol and hash[1][1] == symbol and hash[1][2] == symbol:
+        print("You are Winner!")
+        question()
     
 def verificationCases(hash):
   verification = 0
@@ -49,111 +48,31 @@ def verificationCases(hash):
   if verification == 9:
     print("Game Over")
     question()
+    
+def options(option, hash, symbol):
+    option = str(option)
+    for i in range(0,len(hash)):
+        for j in range(0,len(hash)):
+            if hash[i][j] == option:
+                print("teste")
+                if symbol == "X":
+                    symbol = "O"
+                    hash[i][j] = symbol
+                else:
+                    symbol = "X"
+                    hash[i][j] = symbol
+    return symbol
 
 def menuHash(hash):
   symbol = "O"
   option = int(1)
-  while option > 0:
-    option = int(input("\nChoose a number to put the simbol: "))
-    if option == 1:
-      if symbol == "X":
-        symbol = "O"
-        hash[0][0] = symbol
-      else:
-        symbol = "X"
-        hash[0][0] = symbol
-      displayhash(hash)
-      verificationWinner(hash, symbol)
-      verificationCases(hash)
-      
-    elif option == 2:
-      if symbol == "X":
-        symbol = "O"
-        hash[0][1] = symbol
-      else:
-        symbol = "X"
-        hash[0][1] = symbol
-      displayhash(hash)
-      verificationWinner(hash, symbol)
-      verificationCases(hash)
-      
-    elif option == 3:
-      if symbol == "X":
-        symbol = "O"
-        hash[0][2] = symbol
-      else:
-        symbol = "X"
-        hash[0][2] = symbol
-      displayhash(hash)
-      verificationWinner(hash, symbol)
-      verificationCases(hash)
-      
-    elif option == 4:
-      if symbol == "X":
-        symbol = "O"
-        hash[1][0] = symbol
-      else:
-        symbol = "X"
-        hash[1][0] = symbol
-      displayhash(hash)
-      verificationWinner(hash, symbol)
-      verificationCases(hash)
-      
-    elif option == 5:
-      if symbol == "X":
-        symbol = "O"
-        hash[1][1] = symbol
-      else:
-        symbol = "X"
-        hash[1][1] = symbol
-      displayhash(hash)
-      verificationWinner(hash, symbol)
-      verificationCases(hash)
-      
-    elif option == 6:
-      if symbol == "X":
-        symbol = "O"
-        hash[1][2] = symbol
-      else:
-        symbol = "X"
-        hash[1][2] = symbol
-      displayhash(hash)
-      verificationWinner(hash, symbol)
-      verificationCases(hash)
-      
-    elif option == 7:
-      if symbol == "X":
-        symbol = "O"
-        hash[2][0] = symbol
-      else:
-        symbol = "X"
-        hash[2][0] = symbol
-      displayhash(hash)
-      verificationWinner(hash, symbol)
-      verificationCases(hash)
-      
-    elif option == 8:
-      if symbol == "X":
-        symbol = "O"
-        hash[2][1] = symbol
-      else:
-        symbol = "X"
-        hash[2][1] = symbol
-      displayhash(hash)
-      verificationWinner(hash, symbol)
-      verificationCases(hash)
-      
-    elif option == 9:
-      if symbol == "X":
-        symbol = "O"
-        hash[2][2] = symbol
-      else:
-        symbol = "X"
-        hash[2][2] = symbol
-      displayhash(hash)
-      verificationWinner(hash, symbol)
-      verificationCases(hash)
-
+  while option != 0:
+    option = input("\nChoose a number to put the symbol: ")
+    symbol = options(option, hash, symbol)
+    displayhash(hash)
+    verificationWinner(hash, symbol)
+    verificationCases(hash)
+    
 def question():
   option = input("would you like to play again?" + " Yes or Not? ").upper()
   if option == "YES":
