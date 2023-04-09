@@ -1,7 +1,8 @@
 import sys
 import os
+import numpy as np
 
-def displayhash(hash):
+def displayHash(hash):
   os.system('cls')
   print("TIC-TAC-TOE:")
   print(" ")
@@ -11,57 +12,66 @@ def displayhash(hash):
       print(hash[i][j], end="" + "|")
     print()
     
-def verificationWinner(hash, symbol):
-    if hash[0][0] == symbol and hash[1][0] == symbol and hash[2][0] == symbol:
-        print("You are Winner!")
-        question()
-    elif hash[0][0] == symbol and hash[0][1] == symbol and hash[0][2] == symbol:
-        print("You are Winner!")
-        question()
-    elif hash[0][2] == symbol and hash[1][2] == symbol and hash[2][2] == symbol:
-        print("You are Winner!")
-        question()
-    elif hash[2][0] == symbol and hash[2][1] == symbol and hash[2][2] == symbol:
-        print("You are Winner!")
-        question()
-    elif hash[0][0] == symbol and hash[1][1] == symbol and hash[2][2] == symbol:
-        print("You are Winner!")
-        question()
-    elif hash[0][2] == symbol and hash[1][1] == symbol and hash[2][0] == symbol:
-        print("You are Winner!")
-        question()
-    elif hash[0][1] == symbol and hash[1][1] == symbol and hash[2][1] == symbol:
-        print("You are Winner!")
-        question()
-    elif hash[1][0] == symbol and hash[1][1] == symbol and hash[1][2] == symbol:
-        print("You are Winner!")
-        question()
+def verificationWinner(hash):
+  verification1 = lineCheck(hash)
+  verification2 = columnCheck(hash)
+  if lineCheck(hash) == True or columnCheck(hash) == True or diagonalCheck(hash) == True:
+    print("You are Winner")
+    question()
+
+def lineCheck(hash):
+  for i in range(len(hash)):
+    if all(verification == 'X' for verification in hash[i]):
+      return True
+    elif all(verification == 'O' for verification in hash[i]):
+      return True
     
+def columnCheck(hash):
+  for i in range(0,len(hash)):
+    linha = [linhas[i] for linhas in hash]
+    if all(verification == 'X' for verification in linha):
+      return True
+    elif all(verification == 'O' for verification in linha):
+      return True
+
+def diagonalCheck(hash):
+  diagonal = np.diag(hash)
+  diagonalInverted = np.diag(np.fliplr(hash))
+  if all(verification == 'X' for verification in diagonal):
+    return True
+  elif all(verification == 'O'  for verification in diagonal):
+    return True
+  elif all(verification == 'X' for verification in diagonalInverted):
+    return True
+  elif all(verification == 'O'  for verification in diagonalInverted):
+    return True
+
+
 def verificationCases(hash):
-  verification = 0
+  verification = []
   for line in hash:
-    for word in line:
-      if word == 'X' or word == 'O':
-        verification = verification + 1
-      else:
-        break
-  if verification == 9:
+    if all(word == 'X' or word == 'O' for word in line):
+      verification.append(True)
+    else:
+      verification.append(False)
+      break
+  if all(verification == True for verification in verification):
     print("Game Over")
     question()
     
 def options(option, hash, symbol):
-    option = str(option)
-    for i in range(0,len(hash)):
-        for j in range(0,len(hash)):
-            if hash[i][j] == option:
-                print("teste")
-                if symbol == "X":
-                    symbol = "O"
-                    hash[i][j] = symbol
-                else:
-                    symbol = "X"
-                    hash[i][j] = symbol
-    return symbol
+  option = str(option)
+  for i in range(0,len(hash)):
+      for j in range(0,len(hash)):
+          if hash[i][j] == option:
+              print("teste")
+              if symbol == "X":
+                  symbol = "O"
+                  hash[i][j] = symbol
+              else:
+                  symbol = "X"
+                  hash[i][j] = symbol
+  return symbol
 
 def menuHash(hash):
   symbol = "O"
@@ -69,8 +79,8 @@ def menuHash(hash):
   while option != 0:
     option = input("\nChoose a number to put the symbol: ")
     symbol = options(option, hash, symbol)
-    displayhash(hash)
-    verificationWinner(hash, symbol)
+    displayHash(hash)
+    verificationWinner(hash)
     verificationCases(hash)
     
 def question():
@@ -84,7 +94,7 @@ def question():
 
 def main():
   hash = [["1", "2", "3"], ["4", "5", "6"], ["7", "8", "9"]]
-  displayhash(hash)
+  displayHash(hash)
   menuHash(hash)
 
 main()
