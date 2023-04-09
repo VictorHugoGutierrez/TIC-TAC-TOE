@@ -13,8 +13,6 @@ def displayHash(hash):
     print()
     
 def verificationWinner(hash):
-  verification1 = lineCheck(hash)
-  verification2 = columnCheck(hash)
   if lineCheck(hash) == True or columnCheck(hash) == True or diagonalCheck(hash) == True:
     print("You are Winner")
     question()
@@ -62,15 +60,14 @@ def verificationCases(hash):
 def options(option, hash, symbol):
   option = str(option)
   for i in range(0,len(hash)):
-      for j in range(0,len(hash)):
-          if hash[i][j] == option:
-              print("teste")
-              if symbol == "X":
-                  symbol = "O"
-                  hash[i][j] = symbol
-              else:
-                  symbol = "X"
-                  hash[i][j] = symbol
+    for j in range(0,len(hash)):
+      if hash[i][j] == option:
+          if symbol == "X":
+              symbol = "O"
+              hash[i][j] = symbol
+          else:
+              symbol = "X"
+              hash[i][j] = symbol
   return symbol
 
 def menuHash(hash):
